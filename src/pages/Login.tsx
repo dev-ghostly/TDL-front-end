@@ -13,6 +13,26 @@ export default function Login(){
             [e.target.id]: e.target.value
         });
     }
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        axios.post('http://82.165.221.123:3000/api/users/login',{
+            username: user.username,
+            password: user.password
+        }).then((response) => {
+            if(response.status === 200){
+                localStorage.setItem('token', response.data.token);
+                alert("User logged in successfully");
+            }
+            else if(response.status === 400){
+                alert("User does not exist");
+            }
+            else if(response.status === 500){
+                alert("Internal server error");
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     return <>
         <Navbar />
         <main className="flex max-w-6xl mx-auto font-website">
@@ -20,7 +40,7 @@ export default function Login(){
                 <h1 className="text-4xl font-semibold mt-80">login.</h1>
             </div>
             <div className="w-1/2">
-                <form className="mt-52 bg-two p-4 rounded-lg">
+                <form onSubmit={(e) => handleSubmit(e)} className="mt-52 bg-two p-4 rounded-lg">
                     <div className="flex flex-col mb-4">
                         <label htmlFor="username" className="text-sm mb-2">Username</label>
                         <input type="text" id="username" className="p-2 bg-four rounded-full" onChange={(e) => handleChange(e)} />
