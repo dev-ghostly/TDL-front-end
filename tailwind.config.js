@@ -14,6 +14,9 @@ export default {
       five : "#4DB97E",
       six : "#C56363"
     },
+    fontFamily: {
+      website: ['Poppins', 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [],
