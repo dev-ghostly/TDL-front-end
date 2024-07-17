@@ -42,7 +42,7 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { getCategoriesStart, getCategoriesSuccess, getCategoriesFailure } =
+export const { getCategoriesStart, getCategoriesSuccess, getCategoriesFailure, addCategory, updateCategory, deleteCategory, addTask, deleteTask } =
   categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
