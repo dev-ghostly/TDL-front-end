@@ -58,6 +58,30 @@ export default function App(){
         })
     }
 
+    function createCategory() {
+        var token = localStorage.getItem("token");
+        if (!token) {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+            return;
+        }
+        var categoryname = window.prompt("Enter the category name");
+        if (!categoryname) {
+            return;
+        }
+        axios.post("http://82.165.221.123:3000/api/categories",{
+            name: categoryname,
+        },{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            dispatch(addCategory(response.data.category));
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -100,7 +124,7 @@ export default function App(){
                                 </div>
                             </div>
                         })}
-                        <button className="mt-4 rounded-full h-6 w-6 flex justify-center items-center bg-two">+</button>
+                        <button onClick={(e) => createCategory(e)} className="mt-4 rounded-full h-6 w-6 flex justify-center items-center bg-two">+</button>
                     </div>
                 </div>
             </div>
