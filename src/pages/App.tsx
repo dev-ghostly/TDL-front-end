@@ -53,6 +53,7 @@ export default function App(){
             }
         }).then((response) => {
             dispatch(addTask(response.data));
+            console.log(response.data);
         }).catch((error) => {
             console.log(error);
         })

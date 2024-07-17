@@ -25,18 +25,19 @@ const categoriesSlice = createSlice({
       state.categories.push(action.payload);
     },
     updateCategory(state, action : { payload: any }) {
-      const index = state.categories.findIndex((category) => category.id === action.payload.id);
+      const index = state.categories.findIndex((category) => category._id === action.payload.id);
       state.categories[index] = action.payload;
     },
     deleteCategory(state, action : { payload: any }) {
-      state.categories = state.categories.filter((category) => category.id !== action.payload.id);
+      state.categories = state.categories.filter((category) => category._id !== action.payload.id);
     },
     addTask(state, action : { payload: any }) {
-      const categoryIndex = state.categories.findIndex((category) => category.id === action.payload.categoryId);
+      console.log(action.payload);
+      const categoryIndex = state.categories.findIndex((category) => category._id === action.payload.category);
       state.categories[categoryIndex].tasks.push(action.payload);
     },
     deleteTask(state, action : { payload: any }) {
-      const categoryIndex = state.categories.findIndex((category) => category.id === action.payload.categoryId);
+      const categoryIndex = state.categories.findIndex((category) => category._id === action.payload.categoryId);
       state.categories[categoryIndex].tasks = state.categories[categoryIndex].tasks.filter((task) => task.id !== action.payload.id);
     },
   },
