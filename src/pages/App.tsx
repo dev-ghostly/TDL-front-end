@@ -103,9 +103,9 @@ export default function App(){
             <div className="w-3/4 h-screen">
                 <div className="mt-4">
                     <h1 className="font-semibold ml-8 text-2xl">Your Lists</h1>
-                    <div className="ml-3 flex flex-wrap mt-8">
+                    <div className="ml-3 flex flex-nowrap overflow-x-auto mt-8">
                         {categories.map((category: any) => {
-                            return <div className="w-2/5 p-4">
+                            return <div className="w-2/5 p-4 flex-none">
                                 <div className="bg-one p-4 rounded-lg">
                                     <h2 className="font-semibold">{category.name}</h2>
                                     <button onClick={(e) => createTask(category._id)} className="mt-2 w-full h-10 rounded-xl bg-three flex justify-center items-center">
