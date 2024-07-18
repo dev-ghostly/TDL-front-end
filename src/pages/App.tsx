@@ -102,6 +102,25 @@ export default function App(){
         })
     }
 
+    function deleteCategoryClick(categoryId: string) {
+        var token = localStorage.getItem("token");
+        if (!token) {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+            return;
+        }
+        axios.delete(`http://82.165.221.123:3000/api/categories/${categoryId}`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            dispatch(deleteCategory(categoryId));
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -123,10 +142,13 @@ export default function App(){
                 <div className="mt-4">
                     <h1 className="font-semibold ml-8 text-2xl">Your Lists</h1>
                     <div className="ml-3 flex flex-nowrap overflow-x-auto mt-8">
-                        {categories.map((category: any) => {
+                        {categories.map((category: any, index : any) => {
                             return <div className="w-2/5 p-4 flex-none">
                                 <div className="bg-one p-4 rounded-lg">
-                                    <h2 className="font-semibold">{category.name}</h2>
+                                    <div className="flex justify-between">
+                                        <h2 className="font-semibold">{category.name}</h2>
+                                        {index !== 0 && <button onClick={(e) => deleteCategoryClick(category._id)} className="ml-2">Delete</button> }
+                                    </div>
                                     <button onClick={(e) => createTask(category._id)} className="mt-2 w-full h-10 rounded-xl bg-three flex justify-center items-center">
                                         <h2>+</h2>
                                     </button>
