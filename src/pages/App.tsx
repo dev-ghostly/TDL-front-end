@@ -121,6 +121,15 @@ export default function App(){
         })
     }
 
+    function logout() {
+        var prompt = window.confirm("Are you sure you want to log out?");
+        if (!prompt) {
+            return;
+        }
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    }
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -134,7 +143,7 @@ export default function App(){
                 <div>
                     <ul className="list-disc pl-4">
                         <li>Settings</li>
-                        <li>Log out</li>
+                        <li onClick={(e) => logout()}>Log out</li>
                     </ul>
                 </div>
             </div>
