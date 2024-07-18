@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { deleteTask } from "../redux/slices/categoriesSlice"
 import { useEffect } from "react";
 export default function Task({item, category}: any) {
@@ -26,7 +26,7 @@ export default function Task({item, category}: any) {
         })
     }
     return <div className="bg-two rounded-lg py-2 flex">
-        <div className="mt-1.5 ml-2 h-2 w-2 bg-six rounded-full" onClick={(e) => deleteTaskClick(item._id, category._id)}></div>            
+        <div className="mt-1.5 ml-2 h-2 w-2 bg-six rounded-full" onClick={() => deleteTaskClick(item._id, category._id)}></div>            
         <div className="gap-1">
             <h3 className="ml-2 font-semibold text-sm">{item.title}</h3>
             <p className="ml-2 text-xs">{item.description}</p>

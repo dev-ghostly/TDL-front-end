@@ -1,6 +1,6 @@
 import Logo from "../components/Logo";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesStart, getCategoriesFailure, getCategoriesSuccess, addCategory, addTask, updateCategory, deleteCategory, deleteTask } from "../redux/slices/categoriesSlice";
+import { getCategoriesStart, getCategoriesFailure, getCategoriesSuccess, addCategory } from "../redux/slices/categoriesSlice";
 import {useEffect} from "react";
 import axios from "axios";
 import Category from "../components/Category";
@@ -32,34 +32,6 @@ export default function App(){
         })
     }, []);
 
-    function createTask(categoryId: string) {
-        var token = localStorage.getItem("token");
-        if (!token) {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
-            return;
-        }
-        var taskname = window.prompt("Enter the task name");
-        var description = window.prompt("Enter the task description");
-        if (!taskname || !description) {
-            return;
-        }
-        axios.post("http://82.165.221.123:3000/api/tasks",{
-            title: taskname,
-            description: description,
-            category: categoryId,
-        },{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response) => {
-            dispatch(addTask(response.data));
-            console.log(response.data);
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
     function createCategory() {
         var token = localStorage.getItem("token");
         if (!token) {
@@ -79,44 +51,6 @@ export default function App(){
             }
         }).then((response) => {
             dispatch(addCategory(response.data.category));
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
-    function deleteTaskClick(taskId: string, categoryId: string) {
-        var token = localStorage.getItem("token");
-        if (!token) {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
-            return;
-        }
-        axios.delete(`http://82.165.221.123:3000/api/tasks/${taskId}`,{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response) => {
-            dispatch(deleteTask({id: taskId, categoryId: categoryId}));
-            console.log(response.data);
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
-    function deleteCategoryClick(categoryId: string) {
-        var token = localStorage.getItem("token");
-        if (!token) {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
-            return;
-        }
-        axios.delete(`http://82.165.221.123:3000/api/categories/${categoryId}`,{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response) => {
-            dispatch(deleteCategory({id : categoryId}));
-            console.log(response.data);
         }).catch((error) => {
             console.log(error);
         })
@@ -143,7 +77,7 @@ export default function App(){
                 <Logo />
                 <div className="flex items-center gap-2">
                     <div className="h-2 w-2 rounded-full bg-six"></div>
-                    <p className="font-semibold text-sm" onClick={(e) => logout()}>Log out</p>
+                    <p className="font-semibold text-sm" onClick={() => logout()}>Log out</p>
                 </div>
             </div>
             <div className="w-3/4 h-screen">

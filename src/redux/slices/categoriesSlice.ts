@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Category } from "../../types/Category";
 
 const initialState = {
-  categories: [],
+  categories: [] as Category[],
   isLoading: false,
   error: null,
 };
@@ -21,7 +22,7 @@ const categoriesSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    addCategory(state, action : { payload: any }) {
+    addCategory(state, action : PayloadAction<Category>) {
       state.categories.push(action.payload);
     },
     updateCategory(state, action : { payload: any }) {

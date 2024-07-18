@@ -1,6 +1,6 @@
 import { CiMenuKebab } from "react-icons/ci";
 import Task from "./Task";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { addTask, deleteCategory, updateCategory } from "../redux/slices/categoriesSlice";
@@ -90,13 +90,13 @@ export default function Category({category, index}: any) {
         <div className="bg-one p-4 rounded-lg relative">
             <div className="flex justify-between">
                 <h2 className="font-semibold">{category.name}</h2>
-                {index !== 0 && <button onClick={(e) => setModal(!modal)} className="ml-2"><CiMenuKebab /></button> }
+                {index !== 0 && <button onClick={() => setModal(!modal)} className="ml-2"><CiMenuKebab /></button> }
             </div>
             {modal && <div className="bg-two rounded-lg py-2 flex w-20 absolute -right-12 flex-col items-start px-2">
-                    <button className="text-xs" onClick={(e) => deleteCategoryClick(category._id)}>Delete</button>
-                    <button className="text-xs" onClick={(e) => updateCategoryClick(category._id)}>Rename</button>
+                    <button className="text-xs" onClick={() => deleteCategoryClick(category._id)}>Delete</button>
+                    <button className="text-xs" onClick={() => updateCategoryClick(category._id)}>Rename</button>
                 </div>}
-            <button onClick={(e) => createTask(category._id)} className="mt-2 w-full h-10 rounded-xl bg-three flex justify-center items-center">
+            <button onClick={() => createTask(category._id)} className="mt-2 w-full h-10 rounded-xl bg-three flex justify-center items-center">
                 <h2>+</h2>
             </button>
             <ul className="flex flex-col gap-2 mt-2">
