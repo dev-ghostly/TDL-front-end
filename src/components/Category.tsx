@@ -53,6 +53,7 @@ export default function Category({category, index}: any) {
             }
         }).then((response) => {
             dispatch(deleteCategory({id : categoryId}));
+            setModal(false);
             console.log(response.data);
         }).catch((error) => {
             console.log(error);
@@ -78,6 +79,7 @@ export default function Category({category, index}: any) {
             }
         }).then((response) => {
             dispatch(updateCategory({id: categoryId, name: name}));
+            setModal(false);
             console.log(response.data);
         }).catch((error) => {
             console.log(error);

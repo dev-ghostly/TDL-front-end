@@ -26,7 +26,7 @@ const categoriesSlice = createSlice({
     },
     updateCategory(state, action : { payload: any }) {
       const index = state.categories.findIndex((category) => category._id === action.payload.id);
-      state.categories[index] = action.payload;
+      state.categories[index].name = action.payload.name;
     },
     deleteCategory(state, action : { payload: any }) {
       state.categories = state.categories.filter((category) => category._id !== action.payload.id);
