@@ -1,12 +1,13 @@
 import { CiMenuKebab } from "react-icons/ci";
 import Task from "./Task";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { addTask } from "../redux/slices/categoriesSlice";
+import { addTask, deleteCategory } from "../redux/slices/categoriesSlice";
 
 export default function Category({category, index}: any) {
     const dispatch = useDispatch();
+    const [modal, setModal] = useState(false);
     useEffect(() => {
         console.log(category);
     }, []);
@@ -39,12 +40,35 @@ export default function Category({category, index}: any) {
         })
     }
 
+    function deleteCategoryClick(categoryId: string) {
+        var token = localStorage.getItem("token");
+        if (!token) {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+            return;
+        }
+        axios.delete(`http://82.165.221.123:3000/api/categories/${categoryId}`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response) => {
+            dispatch(deleteCategory({id : categoryId}));
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     return <div className="w-2/5 p-4 flex-none">
-        <div className="bg-one p-4 rounded-lg">
+        <div className="bg-one p-4 rounded-lg relative">
             <div className="flex justify-between">
                 <h2 className="font-semibold">{category.name}</h2>
-                {index !== 0 && <button onClick={(e) => console.log(e)} className="ml-2"><CiMenuKebab /></button> }
+                {index !== 0 && <button onClick={(e) => setModal(!modal)} className="ml-2"><CiMenuKebab /></button> }
             </div>
+            {modal && <div className="bg-two rounded-lg py-2 flex w-20 absolute -right-12 flex-col items-start px-2">
+                    <button className="text-xs" onClick={(e) => deleteCategoryClick(category._id)}>Delete</button>
+                    <button className="text-xs">Rename</button>
+                </div>}
             <button onClick={(e) => createTask(category._id)} className="mt-2 w-full h-10 rounded-xl bg-three flex justify-center items-center">
                 <h2>+</h2>
             </button>
