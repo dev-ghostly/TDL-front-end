@@ -84,14 +84,10 @@ export default function App(){
     }
 
     function deleteTaskClick(taskId: string, categoryId: string) {
-        var confirm = window.confirm("Are you sure you want to delete this task?");
         var token = localStorage.getItem("token");
         if (!token) {
             localStorage.removeItem("token");
             window.location.href = "/login";
-            return;
-        }
-        if (!confirm) {
             return;
         }
         axios.delete(`http://82.165.221.123:3000/api/tasks/${taskId}`,{
@@ -100,6 +96,7 @@ export default function App(){
             }
         }).then((response) => {
             dispatch(deleteTask({id: taskId, categoryId: categoryId}));
+            console.log(response.data);
         }).catch((error) => {
             console.log(error);
         })
@@ -136,7 +133,7 @@ export default function App(){
                                     <ul className="flex flex-col gap-2 mt-2">
                                         {category.tasks.map((item: any) => {
                                             return <div className="bg-two rounded-lg py-2 flex">
-                                                <div className="mt-1.5 ml-2 h-2 w-2 bg-six rounded-full"></div>            
+                                                <div className="mt-1.5 ml-2 h-2 w-2 bg-six rounded-full" onClick={(e) => deleteTaskClick(item._id, category._id)}></div>            
                                                 <div className="gap-1">
                                                     <h3 className="ml-2 font-semibold text-sm">{item.title}</h3>
                                                     <p className="ml-2 text-xs">{item.description}</p>

@@ -38,7 +38,7 @@ const categoriesSlice = createSlice({
     },
     deleteTask(state, action : { payload: any }) {
       const categoryIndex = state.categories.findIndex((category) => category._id === action.payload.categoryId);
-      state.categories[categoryIndex].tasks = state.categories[categoryIndex].tasks.filter((task) => task.id !== action.payload.id);
+      state.categories[categoryIndex].tasks = state.categories[categoryIndex].tasks.filter((task) => task._id !== action.payload.id);
     },
   },
 });
