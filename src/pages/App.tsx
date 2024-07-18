@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesStart, getCategoriesFailure, getCategoriesSuccess, addCategory, addTask, updateCategory, deleteCategory, deleteTask } from "../redux/slices/categoriesSlice";
 import {useEffect} from "react";
 import axios from "axios";
+import { CiMenuKebab } from "react-icons/ci";
 
 export default function App(){
     const dispatch = useDispatch();
@@ -140,11 +141,9 @@ export default function App(){
         return <main className="max-w-6xl mx-auto flex font-website">
             <div className="w-1/4 h-screen bg-two p-4 flex flex-col justify-between">
                 <Logo />
-                <div>
-                    <ul className="list-disc pl-4">
-                        <li>Settings</li>
-                        <li onClick={(e) => logout()}>Log out</li>
-                    </ul>
+                <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 rounded-full bg-six"></div>
+                    <p className="font-semibold text-sm" onClick={(e) => logout()}>Log out</p>
                 </div>
             </div>
             <div className="w-3/4 h-screen">
@@ -156,7 +155,7 @@ export default function App(){
                                 <div className="bg-one p-4 rounded-lg">
                                     <div className="flex justify-between">
                                         <h2 className="font-semibold">{category.name}</h2>
-                                        {index !== 0 && <button onClick={(e) => deleteCategoryClick(category._id)} className="ml-2">Delete</button> }
+                                        {index !== 0 && <button onClick={(e) => deleteCategoryClick(category._id)} className="ml-2"><CiMenuKebab /></button> }
                                     </div>
                                     <button onClick={(e) => createTask(category._id)} className="mt-2 w-full h-10 rounded-xl bg-three flex justify-center items-center">
                                         <h2>+</h2>
