@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesStart, getCategoriesFailure, getCategoriesSuccess, addCategory, addTask, updateCategory, deleteCategory, deleteTask } from "../redux/slices/categoriesSlice";
 import {useEffect} from "react";
 import axios from "axios";
-import { CiMenuKebab } from "react-icons/ci";
+import Category from "../components/Category";
 
 export default function App(){
     const dispatch = useDispatch();
@@ -151,30 +151,9 @@ export default function App(){
                     <h1 className="font-semibold ml-8 text-2xl">Your Lists</h1>
                     <div className="ml-3 flex flex-nowrap overflow-x-auto mt-8">
                         {categories.map((category: any, index : any) => {
-                            return <div className="w-2/5 p-4 flex-none">
-                                <div className="bg-one p-4 rounded-lg">
-                                    <div className="flex justify-between">
-                                        <h2 className="font-semibold">{category.name}</h2>
-                                        {index !== 0 && <button onClick={(e) => deleteCategoryClick(category._id)} className="ml-2"><CiMenuKebab /></button> }
-                                    </div>
-                                    <button onClick={(e) => createTask(category._id)} className="mt-2 w-full h-10 rounded-xl bg-three flex justify-center items-center">
-                                        <h2>+</h2>
-                                    </button>
-                                    <ul className="flex flex-col gap-2 mt-2">
-                                        {category.tasks.map((item: any) => {
-                                            return <div className="bg-two rounded-lg py-2 flex">
-                                                <div className="mt-1.5 ml-2 h-2 w-2 bg-six rounded-full" onClick={(e) => deleteTaskClick(item._id, category._id)}></div>            
-                                                <div className="gap-1">
-                                                    <h3 className="ml-2 font-semibold text-sm">{item.title}</h3>
-                                                    <p className="ml-2 text-xs">{item.description}</p>
-                                                </div>
-                                            </div>
-                                        })}
-                                    </ul>
-                                </div>
-                            </div>
+                            return <Category key={index} category={category} index={index} />
                         })}
-                        <button onClick={(e) => createCategory(e)} className="mt-4 rounded-full h-6 w-6 flex justify-center items-center bg-two">+</button>
+                        <button onClick={() => createCategory()} className="mt-4 rounded-full h-6 w-6 flex justify-center items-center bg-two">+</button>
                     </div>
                 </div>
             </div>
