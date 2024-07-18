@@ -114,7 +114,7 @@ export default function App(){
                 Authorization: `Bearer ${token}`
             }
         }).then((response) => {
-            dispatch(deleteCategory(categoryId));
+            dispatch(deleteCategory({id : categoryId}));
             console.log(response.data);
         }).catch((error) => {
             console.log(error);
