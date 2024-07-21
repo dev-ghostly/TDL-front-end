@@ -9,19 +9,19 @@ import App from "./pages/App";
   
 const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/remindme",
       element: <Home />,
     },
     {
-      path: "/signup",
+      path: "/remindme/signup",
       element: <Signup />
     },
     {
-      path: "/login",
+      path: "/remindme/login",
       element: <Login />
     },
     {
-      path : "/app",
+      path : "/remindme/app",
       element : <App />
     },
     {
