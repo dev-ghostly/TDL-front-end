@@ -10,19 +10,24 @@ import App from "./pages/App";
 const router = createBrowserRouter([
     {
       path: "/remindme",
-      element: <Home />,
-    },
-    {
-      path: "/remindme/signup",
-      element: <Signup />
-    },
-    {
-      path: "/remindme/login",
-      element: <Login />
-    },
-    {
-      path : "/remindme/app",
-      element : <App />
+      children: [
+        {
+          path: "",
+          element: <Home />
+        },
+        {
+          path: "signup",
+          element: <Signup />
+        },
+        {
+          path: "login",
+          element: <Login />
+        },
+        {
+          path : "app",
+          element : <App />
+        },
+      ]
     },
     {
       path: "*",
