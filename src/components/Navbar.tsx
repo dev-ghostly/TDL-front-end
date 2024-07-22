@@ -7,10 +7,10 @@ export default function Navbar(){
             <Logo />
             <ul className="flex space-x-4 text-sm">
                 <li>
-                    <Link to="/login">Login</Link>
+                    <Link to="/remindme/login">Login</Link>
                 </li>
                 <li>
-                    <Link to="/signup">Sign Up</Link>
+                    <Link to="/remindme/signup">Sign Up</Link>
                 </li>
             </ul>
         </nav>

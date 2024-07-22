@@ -22,7 +22,7 @@ export default function Login(){
             if(response.status === 200){
                 localStorage.setItem('token', response.data.token);
                 alert("User logged in successfully");
-                window.location.href = '/app';
+                window.location.href = '/remindme/app';
             }
             else if(response.status === 400){
                 alert("User does not exist");

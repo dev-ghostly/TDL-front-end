@@ -16,7 +16,7 @@ export default function App(){
         var token = localStorage.getItem("token");
         if (!token) {
             localStorage.removeItem("token");
-            window.location.href = "/login";
+            window.location.href = "/remindme/login";
             return;
         }
         axios.get("http://82.165.221.123:3000/api/categories",{
@@ -28,17 +28,12 @@ export default function App(){
             console.log(response.data);
         }).catch((error) => {
             dispatch(getCategoriesFailure(error.message));
-            window.location.href = "/login";
+            window.location.href = "/remindme/login";
         })
     }, []);
 
     function createCategory() {
         var token = localStorage.getItem("token");
-        if (!token) {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
-            return;
-        }
         var categoryname = window.prompt("Enter the category name");
         if (!categoryname) {
             return;
@@ -62,7 +57,7 @@ export default function App(){
             return;
         }
         localStorage.removeItem("token");
-        window.location.href = "/";
+        window.location.href = "/remindme";
     }
 
     if (isLoading) {
