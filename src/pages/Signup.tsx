@@ -21,7 +21,7 @@ export default function Signup(){
             console.log(user);
             return;
         }
-        axios.post('http://82.165.221.123:3000/api/users/register',{
+        axios.post('https://api.raphaelreynaud.com/remindme/api/users/register',{
             username : user.username,
             password : user.password
         }).then((response) => {

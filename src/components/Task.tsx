@@ -14,7 +14,7 @@ export default function Task({item, category}: any) {
             window.location.href = "/login";
             return;
         }
-        axios.delete(`http://82.165.221.123:3000/api/tasks/${taskId}`,{
+        axios.delete(`https://api.raphaelreynaud.com/remindme/api/tasks/${taskId}`,{
             headers: {
                 Authorization: `Bearer ${token}`
             }

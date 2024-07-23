@@ -19,7 +19,7 @@ export default function App(){
             window.location.href = "/remindme/login";
             return;
         }
-        axios.get("http://82.165.221.123:3000/api/categories",{
+        axios.get("https://api.raphaelreynaud.com/remindme/api/categories",{
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -38,7 +38,7 @@ export default function App(){
         if (!categoryname) {
             return;
         }
-        axios.post("http://82.165.221.123:3000/api/categories",{
+        axios.post("https://api.raphaelreynaud.com/remindme/api/categories",{
             name: categoryname,
         },{
             headers: {

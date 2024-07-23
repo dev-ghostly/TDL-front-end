@@ -15,7 +15,7 @@ export default function Login(){
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.post('http://82.165.221.123:3000/api/users/login',{
+        axios.post('https://api.raphaelreynaud.com/remindme/api/users/login',{
             username: user.username,
             password: user.password
         }).then((response) => {

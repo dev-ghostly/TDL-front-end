@@ -24,7 +24,7 @@ export default function Category({category, index}: any) {
         if (!taskname || !description) {
             return;
         }
-        axios.post("http://82.165.221.123:3000/api/tasks",{
+        axios.post("https://api.raphaelreynaud.com/remindme/api/tasks",{
             title: taskname,
             description: description,
             category: categoryId,
@@ -47,7 +47,7 @@ export default function Category({category, index}: any) {
             window.location.href = "/login";
             return;
         }
-        axios.delete(`http://82.165.221.123:3000/api/categories/${categoryId}`,{
+        axios.delete(`https://api.raphaelreynaud.com/remindme/api/categories/${categoryId}`,{
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -71,7 +71,7 @@ export default function Category({category, index}: any) {
         if (!name) {
             return;
         }
-        axios.put(`http://82.165.221.123:3000/api/categories/${categoryId}`,{
+        axios.put(`https://api.raphaelreynaud.com/remindme/api/categories/${categoryId}`,{
             name: name,
         },{
             headers: {
